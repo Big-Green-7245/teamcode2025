@@ -13,7 +13,7 @@ FTC, and [our team code](https://github.com/Big-Green-7245/teamcode2025).
 git clone https://github.com/Big-Green-7245/teamcode2025
 ```
 
-Or, if everyone on your team is using SSH, you may use the SSH version:
+Or, if using SSH, the SSH version may be used:
 
 ```bash
 git clone git@github.com:Big-Green-7245/teamcode2025.git
