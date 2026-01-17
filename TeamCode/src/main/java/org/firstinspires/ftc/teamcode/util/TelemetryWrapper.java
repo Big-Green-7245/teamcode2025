@@ -3,9 +3,6 @@ package org.firstinspires.ftc.teamcode.util;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import java.util.Arrays;
-/**
- * TelemetryWrapper - Makes the telemetry readouts a bit more readable and manageable.
- */
 public class TelemetryWrapper {
     private final Telemetry telemetry;
     private final String[] lines;
