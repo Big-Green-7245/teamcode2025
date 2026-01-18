@@ -15,12 +15,11 @@ public class RobotConfig {
     public DcMotor backRight;
 
     public DcMotor intakeMotor;
-    public DcMotor launchMotor;
+    public DcMotor transferMotor;
+    public DcMotor shooterMotor;
 
     public DcMotor odoXEncoder;
     public DcMotor odoYEncoder;
-
-    public Servo pusherServo;
 
     private HardwareMap hwMap;
 
@@ -29,8 +28,7 @@ public class RobotConfig {
 
         initDriveMotors();
         initSubsystems();
-        initOdometry();
-        initServos();
+        // initOdometry();
     }
 
     private void initDriveMotors() {
@@ -39,10 +37,10 @@ public class RobotConfig {
         backLeft = hwMap.get(DcMotor.class, Constants.BACK_LEFT);
         backRight = hwMap.get(DcMotor.class, Constants.BACK_RIGHT);
 
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        backRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        frontLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        backLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -54,16 +52,16 @@ public class RobotConfig {
 
     private void initSubsystems() {
         intakeMotor = hwMap.get(DcMotor.class, Constants.INTAKE_MOTOR);
-        launchMotor = hwMap.get(DcMotor.class, Constants.LAUNCH_MOTOR);
-
-        intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        launchMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        transferMotor = hwMap.get(DcMotor.class, Constants.TRANSFER_MOTOR);
+        shooterMotor = hwMap.get(DcMotor.class, Constants.SHOOTER_MOTOR);
 
         intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        launchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        transferMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         intakeMotor.setPower(0);
-        launchMotor.setPower(0);
+        transferMotor.setPower(0);
+        shooterMotor.setPower(0);
     }
 
     private void initOdometry() {
@@ -75,11 +73,6 @@ public class RobotConfig {
 
         odoXEncoder.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         odoYEncoder.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    }
-
-    private void initServos() {
-        pusherServo = hwMap.get(Servo.class, Constants.PUSHER_SERVO);
-        pusherServo.setPosition(Constants.PUSHER_REST);
     }
 
     public void resetDriveEncoders() {

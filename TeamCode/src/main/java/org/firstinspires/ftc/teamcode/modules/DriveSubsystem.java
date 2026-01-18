@@ -14,9 +14,9 @@ public class DriveSubsystem {
     }
 
     public void drive(Gamepad gamepad) {
-        double y = -gamepad.left_stick_y;
+        double y = gamepad.left_stick_y;
         double x = gamepad.left_stick_x;
-        double rx = gamepad.right_stick_x;
+        double rx = -gamepad.right_stick_x;
         drive(y, x, rx);
     }
 

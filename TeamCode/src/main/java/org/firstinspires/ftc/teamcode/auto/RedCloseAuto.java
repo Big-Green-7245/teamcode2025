@@ -3,12 +3,11 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
-@Autonomous(name = "redclose", group = "Red")
+@Autonomous(name = "Red Close Auto", group = "Red")
 public class RedCloseAuto extends AutoBase {
 
     @Override
     public void runOpMode() {
-
         initHardware();
 
         waitForStart();
@@ -34,9 +33,7 @@ public class RedCloseAuto extends AutoBase {
                 driveToPose(0, 0, Constants.AUTO_DRIVE_SPEED, 3.0);
             }
 
-            drive.stop();
-            intake.stop();
-            launcher.stop();
+            robot.stopAllMotors();
 
         } catch (Exception e) {
             robot.stopAllMotors();

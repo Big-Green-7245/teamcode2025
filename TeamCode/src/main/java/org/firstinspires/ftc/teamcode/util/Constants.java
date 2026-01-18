@@ -7,12 +7,11 @@ public class Constants {
     public static final String BACK_RIGHT = "backRight";
 
     public static final String INTAKE_MOTOR = "intake";
-    public static final String LAUNCH_MOTOR = "rhino";
+    public static final String TRANSFER_MOTOR = "transfer";
+    public static final String SHOOTER_MOTOR = "shooter";
 
-    public static final String PUSHER_SERVO = "pusherServo";
-
-    public static final String ODO_X_ENCODER = "odoX";
-    public static final String ODO_Y_ENCODER = "odoY";
+    public static final String ODO_X_ENCODER = "odox";
+    public static final String ODO_Y_ENCODER = "odoy";
 
     public static final double DRIVE_SPEED_TURBO = 1.0;
     public static final double DRIVE_SPEED_FAST = 0.8;
@@ -24,9 +23,13 @@ public class Constants {
     public static final double INTAKE_POWER_OUT = -1.0;
     public static final double INTAKE_POWER_STOP = 0.0;
 
-    public static final double LAUNCHER_POWER = 1.0;
-    public static final double LAUNCHER_IDLE = 0.0;
-    public static final int LAUNCHER_SPINUP_MS = 1000;
+    public static final double SHOOTER_POWER = 0.9;
+    public static final double SHOOTER_IDLE = 0.3;
+    public static final int SHOOTER_SPINUP_MS = 1000;
+
+    public static final double TRANSFER_POWER = 1.0;
+    public static final double TRANSFER_IDLE = 0.0;
+    public static final double TRANSFER_REVERSE = -0.5;
 
     public static final double PUSHER_REST = 1.0;
     public static final double PUSHER_PUSH = 0.7;
