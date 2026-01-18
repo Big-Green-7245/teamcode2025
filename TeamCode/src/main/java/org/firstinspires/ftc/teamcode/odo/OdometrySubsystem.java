@@ -1,16 +1,14 @@
 package org.firstinspires.ftc.teamcode.odo;
 
 import org.firstinspires.ftc.teamcode.config.RobotConfig;
-import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class OdometrySubsystem {
 
     private final RobotConfig robot;
     private final Pose2D currentPose;
-
-    private int lastXEncoder;
-    private int lastYEncoder;
 
     public OdometrySubsystem(RobotConfig robot) {
         this.robot = robot;
@@ -20,36 +18,22 @@ public class OdometrySubsystem {
 
     public void reset() {
         currentPose.set(0, 0, 0);
-        lastXEncoder = robot.odoXEncoder.getCurrentPosition();
-        lastYEncoder = robot.odoYEncoder.getCurrentPosition();
+        robot.pinpoint.resetPosAndIMU();
     }
 
     public void setPosition(double x, double y, double heading) {
         currentPose.set(x, y, heading);
-        lastXEncoder = robot.odoXEncoder.getCurrentPosition();
-        lastYEncoder = robot.odoYEncoder.getCurrentPosition();
+        robot.pinpoint.setPosition(new org.firstinspires.ftc.robotcore.external.navigation.Pose2D(
+                DistanceUnit.INCH, x, y, AngleUnit.RADIANS, heading));
     }
 
     public void update() {
-        int currentXEncoder = robot.odoXEncoder.getCurrentPosition();
-        int currentYEncoder = robot.odoYEncoder.getCurrentPosition();
+        robot.pinpoint.update();
+        org.firstinspires.ftc.robotcore.external.navigation.Pose2D pose = robot.pinpoint.getPosition();
 
-        int deltaX = currentXEncoder - lastXEncoder;
-        int deltaY = currentYEncoder - lastYEncoder;
-
-        double dx = (double) deltaX / Constants.ODO_COUNTS_PER_INCH;
-        double dy = (double) deltaY / Constants.ODO_COUNTS_PER_INCH;
-
-        double heading = currentPose.heading;
-
-        double globalDx = dx * Math.cos(heading) - dy * Math.sin(heading);
-        double globalDy = dx * Math.sin(heading) + dy * Math.cos(heading);
-
-        currentPose.x += globalDx;
-        currentPose.y += globalDy;
-
-        lastXEncoder = currentXEncoder;
-        lastYEncoder = currentYEncoder;
+        currentPose.x = pose.getX(DistanceUnit.INCH);
+        currentPose.y = pose.getY(DistanceUnit.INCH);
+        currentPose.heading = pose.getHeading(AngleUnit.RADIANS);
     }
 
     public Pose2D getPose() {

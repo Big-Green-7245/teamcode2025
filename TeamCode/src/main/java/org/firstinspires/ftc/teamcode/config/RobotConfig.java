@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode.config;
 
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import org.firstinspires.ftc.teamcode.util.Constants;
 
@@ -18,8 +21,7 @@ public class RobotConfig {
     public DcMotor transferMotor;
     public DcMotor shooterMotor;
 
-    public DcMotor odoXEncoder;
-    public DcMotor odoYEncoder;
+    public GoBildaPinpointDriver pinpoint;
 
     private HardwareMap hwMap;
 
@@ -28,7 +30,7 @@ public class RobotConfig {
 
         initDriveMotors();
         initSubsystems();
-        // initOdometry();
+        initOdometry();
     }
 
     private void initDriveMotors() {
@@ -65,14 +67,13 @@ public class RobotConfig {
     }
 
     private void initOdometry() {
-        odoXEncoder = hwMap.get(DcMotor.class, Constants.ODO_X_ENCODER);
-        odoYEncoder = hwMap.get(DcMotor.class, Constants.ODO_Y_ENCODER);
+        pinpoint = hwMap.get(GoBildaPinpointDriver.class, Constants.PINPOINT);
 
-        odoXEncoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        odoYEncoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        odoXEncoder.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        odoYEncoder.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        pinpoint.setOffsets(Constants.PINPOINT_X_OFFSET_MM, Constants.PINPOINT_Y_OFFSET_MM, DistanceUnit.MM);
+        pinpoint.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGRAM_POD);
+        pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD,
+                GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        pinpoint.resetPosAndIMU();
     }
 
     public void resetDriveEncoders() {

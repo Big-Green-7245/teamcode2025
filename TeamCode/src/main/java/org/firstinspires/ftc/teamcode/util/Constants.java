@@ -10,6 +10,8 @@ public class Constants {
     public static final String TRANSFER_MOTOR = "transfer";
     public static final String SHOOTER_MOTOR = "shooter";
 
+    public static final String PINPOINT = "pinpoint";
+
     public static final String ODO_X_ENCODER = "odox";
     public static final String ODO_Y_ENCODER = "odoy";
 
@@ -40,6 +42,9 @@ public class Constants {
 
     public static final double ODO_X_OFFSET = 0.0;
     public static final double ODO_Y_OFFSET = 0.0;
+
+    public static final double PINPOINT_X_OFFSET_MM = 0.0;
+    public static final double PINPOINT_Y_OFFSET_MM = 0.0;
 
     public static final double AUTO_DRIVE_SPEED = 0.5;
     public static final double AUTO_STRAFE_SPEED = 0.5;
