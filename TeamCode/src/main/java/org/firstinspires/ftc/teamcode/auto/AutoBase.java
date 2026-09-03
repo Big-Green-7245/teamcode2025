@@ -15,8 +15,7 @@ public abstract class AutoBase extends LinearOpMode {
 
     protected RobotConfig robot;
     protected DriveSubsystem drive;
-    protected IntakeSubsystem intake;
-    protected LauncherSubsystem launcher;
+    protected BallSubsystem ball;
     protected OdometrySubsystem odometry;
 
     protected ElapsedTime runtime = new ElapsedTime();
@@ -27,8 +26,7 @@ public abstract class AutoBase extends LinearOpMode {
         robot.init(hardwareMap);
 
         drive = new DriveSubsystem(robot);
-        intake = new IntakeSubsystem(robot);
-        launcher = new LauncherSubsystem(robot);
+        ball = new BallSubsystem(robot);
         odometry = new OdometrySubsystem(robot);
     }
 
@@ -39,14 +37,13 @@ public abstract class AutoBase extends LinearOpMode {
         while (opModeIsActive() && timer.seconds() < timeout) {
             odometry.update();
             Pose2D current = odometry.getPose();
+            Pose2D target = new Pose2D(targetX, targetY, 0);
 
-            double dx = targetX - current.x;
-            double dy = targetY - current.y;
-            double distance = Math.sqrt(dx * dx + dy * dy);
+            double distance = current.distanceTo(target);
 
             if (distance < Constants.AUTO_POSITION_TOLERANCE) break;
 
-            double targetAngle = Math.atan2(dy, dx);
+            double angle = current.angleTo(target);
             double headingError = normalizeAngle(targetAngle - current.heading);
 
             double errorDerivative = (distance - lastError) / 0.02;
@@ -96,17 +93,17 @@ public abstract class AutoBase extends LinearOpMode {
     }
 
     protected void scorePreload() {
-        launcher.spinUp();
+        ball.spinUpShooter();
         sleep(1000);
 
         for (int i = 0; i < 3; i++) {
-            launcher.push();
+            ball.runTransfer();
             sleep(500);
-            launcher.retract();
+            ball.stopTransfer();
             sleep(500);
         }
 
-        launcher.stop();
+        ball.stopShooter();
         sleep(250);
     }
 

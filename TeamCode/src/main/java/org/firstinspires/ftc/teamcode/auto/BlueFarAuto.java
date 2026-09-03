@@ -35,7 +35,7 @@ public class BlueFarAuto extends AutoBase {
             }
 
             robot.stopAllMotors();
-
+            
         } catch (Exception e) {
             robot.stopAllMotors();
         }

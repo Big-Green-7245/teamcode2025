@@ -53,7 +53,7 @@ public class ButtonHelper{
     }
 
     public boolean held(int idx) { return buttons[idx]; }
-    public boolean released(int idx) { return !buttons[idx]; }
+    public boolean released(int idx) { return !buttons[idx] && prev[idx]; }
     public boolean pressing(int idx) { return buttons[idx] && !prev[idx]; }
 
     public boolean aPressed() { return pressing(a); }
@@ -71,8 +71,8 @@ public class ButtonHelper{
     public boolean startPressed() { return pressing(start); }
     public boolean backPressed() { return pressing(back); }
 
-    public boolean aReleased() { return !buttons[a] && prev[a]; }
-    public boolean bReleased() { return !buttons[b] && prev[b]; }
-    public boolean xReleased() { return !buttons[x] && prev[x]; }
-    public boolean yReleased() { return !buttons[y] && prev[y]; }
+    public boolean aReleased() { return released(a); }
+    public boolean bReleased() { return released(b); }
+    public boolean xReleased() { return released(x); }
+    public boolean yReleased() { return released(y); }
 }
