@@ -17,8 +17,8 @@ public class Shooter extends OpMode {
         backRight  = hardwareMap.get(DcMotor.class, "backRight");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         shooterLeft  = hardwareMap.get(DcMotor.class, "shooterLeft");
-        shooterRight = hardwareMap.get(DcMotor.class, "shooterRight");
-        spinnerServo = hardwareMap.get(CRServo.class, "spinnerServo");
+//        shooterRight = hardwareMap.get(DcMotor.class, "shooterRight");
+//        spinnerServo = hardwareMap.get(CRServo.class, "spinnerServo");
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
         shooterLeft.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -42,21 +42,21 @@ public class Shooter extends OpMode {
         backLeft.setPower(backLeftPower / max);
         frontRight.setPower(frontRightPower / max);
         backRight.setPower(backRightPower / max);
-        if (gamepad1.right_trigger > 0.5) {
-            shooterLeft.setPower(1.0);
-            shooterRight.setPower(1.0);
-        } else {
-            shooterLeft.setPower(0.0);
-            shooterRight.setPower(0.0);
-        }
+//        if (gamepad1.right_trigger > 0.5) {
+//            shooterLeft.setPower(1.0);
+//            shooterRight.setPower(1.0);
+//        } else {
+//            shooterLeft.setPower(0.0);
+//            shooterRight.setPower(0.0);
+//        }
 
-        if (gamepad1.b) {
-            spinnerServo.setPower(-1.0);
-        } else {
-            spinnerServo.setPower(0.0);
-        }
-        telemetry.addData("Shooter", gamepad1.right_trigger > 0.5 ? "ON" : "OFF");
-        telemetry.addData("Spinner Power", spinnerServo.getPower());
+//        if (gamepad1.b) {
+//            spinnerServo.setPower(-1.0);
+//        } else {
+//            spinnerServo.setPower(0.0);
+//        }
+//        telemetry.addData("Shooter", gamepad1.right_trigger > 0.5 ? "ON" : "OFF");
+//        telemetry.addData("Spinner Power", spinnerServo.getPower());
         telemetry.update();
 
     }
