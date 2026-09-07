@@ -14,6 +14,8 @@ public class RobotConfig {
     public DcMotor backLeft;
     public DcMotor backRight;
 
+    public DcMotor testyTesty;
+
     public DcMotor intakeMotor;
     public DcMotor launchMotor;
 
@@ -38,16 +40,19 @@ public class RobotConfig {
         frontRight = hwMap.get(DcMotor.class, Constants.FRONT_RIGHT);
         backLeft = hwMap.get(DcMotor.class, Constants.BACK_LEFT);
         backRight = hwMap.get(DcMotor.class, Constants.BACK_RIGHT);
+        testyTesty = hwMap.get(DcMotor.class, Constants.TESTY);
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        testyTesty.setDirection(DcMotorSimple.Direction.FORWARD);
 
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        testyTesty.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         setDriveMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
@@ -94,6 +99,7 @@ public class RobotConfig {
         frontRight.setMode(mode);
         backLeft.setMode(mode);
         backRight.setMode(mode);
+        testyTesty.setMode(mode);
     }
 
     public void stopAllMotors() {
@@ -103,5 +109,6 @@ public class RobotConfig {
         backRight.setPower(0);
         intakeMotor.setPower(0);
         launchMotor.setPower(0);
+        testyTesty.setPower(0);
     }
 }

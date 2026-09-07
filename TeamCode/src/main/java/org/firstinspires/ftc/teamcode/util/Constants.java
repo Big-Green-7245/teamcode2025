@@ -6,6 +6,7 @@ public class Constants {
     public static final String BACK_LEFT = "backLeft";
     public static final String BACK_RIGHT = "backRight";
 
+    public static final String TESTY = "testyTesty";
     public static final String INTAKE_MOTOR = "intake";
     public static final String LAUNCH_MOTOR = "rhino";
 
